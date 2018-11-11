@@ -1,0 +1,1135 @@
+{
+  "blacklist_regex": "(?i).*[^a-z](password|otp|verification|activation|passcode)[^a-z].*",
+  "rules": [
+    {
+        "name": "HDFC",
+            "patterns": [
+                 {
+          "regex": "([\\d,]+\\.?\\d{0,2}) is (.*) *+(\\d{4}) on (.*) ",
+          "account_type": "bank",
+          "pattern_UID": "10033",
+          "sort_UID": "10033",
+          "sms_type": "transaction",
+          "keyword":"UPI",
+          "data_fields": {
+            "transaction_type": "debit_card",
+            "pan": {
+              "group_id": 3
+            },
+            "amount": {
+              "group_id": 1
+            },
+            "date": {
+              "use_sms_time": true
+            },
+            "pos": {
+              "value": "HDFC"
+            }
+          }
+        }
+                  ],
+      "sender_UID": "9000001",
+      "senders": [
+        "5676712",
+        "HDFCBK",
+        "HDFCMP",
+        "TXNALE"
+      ]
+        
+    },
+    {
+    "name": "PAYTM",
+      "set_account_as_expense": false,
+      "patterns": [
+                {
+          "regex": "([\\d,]+\\.?\\d{0,2}) via (.*) X+(\\d{4}) at (.*) balance: +([\\d,]+\\.?\\d{0,2})",
+          "account_type": "prepaid",
+          "pattern_UID": "590010",
+          "sort_UID": "590010",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit_prepaid",
+            "date": {
+              "use_sms_time": true
+            },
+            "pos": {
+              "group_id": 2,
+              "set_no_pos": true
+            },
+            "account_balance": {
+              "group_id": 5
+            },
+            "amount": {
+              "group_id": 1
+            },
+            "pan": {
+              "value": "PAYTMB",
+              "group_id": 3
+            }
+          }
+        },
+        {
+          "regex": "Rs.([\\d,]+\\.?\\d{0,2}). Recharge (.*) ",
+          "account_type": "prepaid",
+          "pattern_UID": "590011",
+          "sort_UID": "590011",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit_prepaid",
+            "date": {
+              "use_sms_time": true
+            },
+            "pos": {
+              "group_id": 2,
+              "set_no_pos": true
+            },
+            "account_balance": {
+              "group_id": 5
+            },
+            "amount": {
+              "group_id": 1
+            },
+            "pan": {
+              "value": "PAYTMB",
+              "group_id": 3
+            }
+          }
+        },
+        {
+          "regex": "Rs.([\\d,]+\\.?\\d{0,2}) from (.*) \\((\\d+X+(\\d{4}))\\) ",
+          "account_type": "prepaid",
+          "pattern_UID": "590012",
+          "sort_UID": "590012",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "credit",
+            "date": {
+              "use_sms_time": true
+            },
+            "pos": {
+              "group_id": 2,
+              "set_no_pos": true
+            },
+            "account_balance": {
+              "group_id": 5
+            },
+            "amount": {
+              "group_id": 1
+            },
+            "pan": {
+              "value": "PAYTMB",
+              "group_id": 4
+            }
+          }
+        },
+        {
+          "regex": "Rs.([\\d,]+\\.?\\d{0,2}) via (.*) X+(\\d{4})",
+          "account_type": "prepaid",
+          "pattern_UID": "590013",
+          "sort_UID": "590013",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "credit",
+            "date": {
+              "use_sms_time": true
+            },
+            "pos": {
+              "group_id": 2,
+              "set_no_pos": true
+            },
+            "account_balance": {
+              "group_id": 5
+            },
+            "amount": {
+              "group_id": 1
+            },
+            "pan": {
+              "value": "PAYTMB",
+              "group_id": 3
+            }
+          }
+        },
+        {
+          "regex": "Rs.([\\d,]+\\.?\\d{0,2}) to (.*) Rs ([\\d,]+\\.?\\d{0,2})",
+          "account_type": "prepaid",
+          "pattern_UID": "590014",
+          "sort_UID": "590014",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            "pos": {
+              "group_id": 2,
+              "set_no_pos": true
+            },
+            "account_balance": {
+              "group_id": 3
+            },
+            "amount": {
+              "group_id": 1
+            }
+            
+          }
+        },
+        {
+          "regex": "Rs.([\\d,]+\\.?\\d{0,2}) paid (.*) \\d+X+(\\d{4})",
+          "account_type": "prepaid",
+          "pattern_UID": "590015",
+          "sort_UID": "590015",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            "pos": {
+              "group_id": 2,
+              "set_no_pos": true
+            },
+           
+            "pan": {
+              "group_id": 3
+            },
+            "amount": {
+              "group_id": 1
+            }
+            
+          }
+        },
+        {
+          "regex": "([\\d,]+\\.?\\d{0,2}) per (.*) X+(\\d{4})",
+          "account_type": "prepaid",
+          "pattern_UID": "590016",
+          "sort_UID": "590016",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "balance",
+            "date": {
+              "use_sms_time": true
+            },
+            "pos": {
+              "group_id": 2,
+              "set_no_pos": true
+            },
+           
+            "pan": {
+              "group_id": 3
+            },
+            "amount": {
+              "group_id": 1
+            }
+            
+          }
+        },
+        {
+          "regex": "([\\d,]+\\.?\\d{0,2}) credited (.*) X+(\\d{4})",
+          "account_type": "prepaid",
+          "pattern_UID": "590017",
+          "sort_UID": "590017",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "credit",
+            "date": {
+              "use_sms_time": true
+            },
+            "pos": {
+              "group_id": 2,
+              "set_no_pos": true
+            },
+           
+            "pan": {
+              "group_id": 3
+            },
+            "amount": {
+              "group_id": 1
+            }
+            
+          }
+        },
+        {
+          "regex": "You paid (.*) Rs.([\\d,]+\\.?\\d{0,2}). Save",
+          "account_type": "prepaid",
+          "pattern_UID": "590018",
+          "sort_UID": "590018",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            "amount": {
+              "group_id": 2
+            }
+            
+          }
+        },
+        {
+          "regex": "Rs. ([\\d,]+\\.?\\d{0,2}) has ",
+          "account_type": "prepaid",
+          "pattern_UID": "590019",
+          "sort_UID": "590019",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            "amount": {
+              "group_id": 1
+            }
+            
+          }
+        },
+        {
+          "regex": "Rs.([\\d,]+\\.?\\d{0,2}) to (.*)",
+          "account_type": "prepaid",
+          "pattern_UID": "590020",
+          "sort_UID": "590020",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            "amount": {
+              "group_id": 1
+            }
+            
+          }
+        }
+            ],
+            "sender_UID": "90000059",
+      "senders": [
+        "IPAYTM",
+        "PAYTMB",
+        "PAYTM"
+
+      ]
+        },
+    {
+        "name": "BOI",
+             "patterns": [
+            {
+          "regex": "(.*) Rs ([\\d,]+\\.?\\d{0,2}) (.*) X+(\\d{4}) (.*) Bal ([\\d,]+\\.?\\d{0,2})",
+          "account_type": "bank",
+          "pattern_UID": "280007",
+          "sort_UID": "280007",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            "amount": {
+              "group_id": 2
+            },
+            "pan": {
+              "group_id": 4
+            },
+            "account_balance": {
+              "group_id": 6
+            }
+          }
+        },
+        {
+          "regex": " *+(\\d{4}) is (.*) ([\\d,]+\\.?\\d{0,2}) (.*)",
+          "account_type": "bank",
+          "pattern_UID": "280008",
+          "sort_UID": "280008",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            "amount": {
+              "group_id": 3
+            },
+            "pan": {
+              "group_id": 1
+            },
+            "account_balance": {
+              "group_id": 6
+            }
+          }
+        },
+        {
+          "regex": "([\\d,]+\\.?\\d{0,2}) Debited (.*) Ac-XX+(\\d{4}) (.*) Bal ([\\d,]+\\.?\\d{0,2})(.*)",
+          "account_type": "bank",
+          "pattern_UID": "280009",
+          "sort_UID": "280009",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            "amount": {
+              "group_id": 1
+            },
+            "pan": {
+              "group_id": 3
+            },
+            "account_balance": {
+              "group_id": 5
+            }
+          }
+        }
+            ],
+            "sender_UID": "90000028",
+      "senders": [
+        "BOIIND",
+        "STARBI"
+      ]
+        },
+    {
+        "name": "PNB",
+      "patterns": [{
+          "regex": "(.*) no. X+(\\d{4}) (.*) Rs. ([\\d,]+\\.?\\d{0,2}) (.*)",
+          "account_type": "bank",
+          "pattern_UID": "240012",
+          "sort_UID": "240012",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            "pan": {
+              "group_id": 2
+            },
+            "amount": {
+              "group_id": 4
+            }
+            
+          }
+        },
+        {
+          "regex": "(.*) X+(\\d{4}) (.*) (INR|Rs) ([\\d,]+\\.?\\d{0,2})(.*)",
+          "account_type": "bank",
+          "pattern_UID": "240013",
+          "sort_UID": "240013",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "balance",
+            "date": {
+              "use_sms_time": true
+            },
+            "pan": {
+              "group_id": 2
+            },
+            "amount": {
+              "group_id": 5
+            }
+            
+          }
+        },
+        {
+          "regex": "X+\\d+(\\d{4}) Credited (.*) Rs.([\\d,]+\\.?\\d{0,2}),(.*) Bal ([\\d,]+\\.?\\d{0,2})",
+          "account_type": "bank",
+          "pattern_UID": "240014",
+          "sort_UID": "240014",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "credited",
+            "date": {
+              "use_sms_time": true
+            },
+            "pan": {
+              "group_id": 2
+            },
+            "amount": {
+              "group_id": 5
+            }
+            
+          }
+        },
+        {
+          "regex": "X+(\\d{3}) is (.*) ([\\d,]+\\.?\\d{0,2}) on ",
+          "account_type": "bank",
+          "pattern_UID": "240015",
+          "sort_UID": "240015",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "credited",
+            "date": {
+              "use_sms_time": true
+            },
+            "pan": {
+              "group_id": 1
+            },
+            "amount": {
+              "group_id": 3
+            }
+            
+          }
+        }
+    ],
+      "sender_UID": "90000024",
+      "senders": [
+        "PNBSMS",
+        "PNBRWD",
+        "PNBHFL",
+        "PNBCRC"
+      ]
+        
+        },
+        {
+        "name": "BOM",
+            "patterns": [
+                {
+          "regex": "x+(\\d{4}) (.*) Rs. ([\\d,]+\\.?\\d{0,2}) (.*) Rs. ([\\d,]+\\.?\\d{0,2}) ",
+          "account_type": "bank",
+          "pattern_UID": "260005",
+          "sort_UID": "260005",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "pan": {
+              "group_id": 1
+            },
+            "amount": {
+              "group_id": 3
+            },
+            "account_balance": {
+              "group_id": 5
+            },
+            "date": {
+              "use_sms_time": true
+            }
+          }
+        },
+        {
+          "regex": "([\\d,]+\\.?\\d{0,2}) was (.*) x+(\\d{4}) (.*) ([\\d,]+\\.?\\d{0,2})",
+          "account_type": "bank",
+          "pattern_UID": "260006",
+          "sort_UID": "260006",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "pan": {
+              "group_id": 3
+            },
+            "amount": {
+              "group_id": 1
+            },
+            "account_balance": {
+              "group_id": 5
+            },
+            "date": {
+              "use_sms_time": true
+            }
+          }
+        }
+            ],
+             "sender_UID": "90000026",
+      "senders": [
+        "MAHABK"
+      ]
+            
+            
+        },
+        {
+        "name": "SBI",
+            "patterns": [
+                {
+          "regex": "(.*) ([\\d,]+\\.?\\d{0,2}) on (.*)",
+          "account_type": "bank",
+          "pattern_UID": "130027",
+          "sort_UID": "130027",
+          "sms_type": "transaction",
+          "keyword":"NEFT",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            "pan": {
+              "group_id": 1
+            },
+            "amount": {
+              "group_id": 2 
+            },
+            "pos": {
+              "value": "SBI",
+              "set_no_pos": true
+            }
+          }
+        },
+        {
+          "regex": "Rs. ([\\d,]+\\.?\\d{0,2}) for",
+          "account_type": "bank",
+          "pattern_UID": "130028",
+          "sort_UID": "130028",
+          "sms_type": "transaction",
+          "keyword":"NEFT",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            
+            "amount": {
+              "group_id": 1 
+            },
+            "pos": {
+              "value": "SBI",
+              "set_no_pos": true
+            }
+          }
+        },
+        {
+          "regex": "a/c X+\\d+(\\d{4})",
+          "account_type": "bank",
+          "pattern_UID": "130029",
+          "sort_UID": "130029",
+          "sms_type": "transaction",
+          "keyword":"NEFT",
+          "data_fields": {
+            "transaction_type": "due",
+            "date": {
+              "use_sms_time": true
+            },
+            
+            "pan": {
+              "group_id": 1 
+            },
+            "pos": {
+              "value": "SBI",
+              "set_no_pos": true
+            }
+          }
+        },
+        {
+          "regex": "Rs ([\\d,]+\\.?\\d{0,2}) w/d (.*) A/cx+(\\d{4})on?+(.*) bal Rs([\\d,]+\\.?\\d{0,2})?+(.*) ",
+          "account_type": "bank",
+          "pattern_UID": "130030",
+          "sort_UID": "130030",
+          "sms_type": "transaction",
+          "keyword":"NEFT",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            
+            "pan": {
+              "group_id": 3 
+            },
+            "amount": {
+              "group_id": 1 
+            },
+            "account_balance": {
+              "group_id": 5 
+            },
+            "pos": {
+              "value": "SBI",
+              "set_no_pos": true
+            }
+          }
+        },
+        {
+          "regex": "AC X+\\d+(\\d{4}) irregular (.*) INR ([\\d,]+\\.?\\d{0,2}).Please ",
+          "account_type": "bank",
+          "pattern_UID": "130031",
+          "sort_UID": "130031",
+          "sms_type": "transaction",
+          "keyword":"NEFT",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            
+            "pan": {
+              "group_id": 1 
+            },
+            "amount": {
+              "group_id": 3 
+            },
+            
+            "pos": {
+              "value": "SBI",
+              "set_no_pos": true
+            }
+          }
+        }
+            ],
+             "sender_UID": "90000013",
+      "senders": [
+        "ATMSBI",
+        "CBSSBI",
+        "SBICRD",
+        "SBIINB",
+        "SCISMS",
+        "SBIPSG",
+        "SBIUPI"
+
+      ]
+        },
+        {
+         "name": "Canara",
+             "patterns": [
+             {
+          "regex": "X+(\\d{4}) is (.*) Rs.([\\d,]+\\.?\\d{0,2}) (.*) X+(\\d{4}) ",
+          "account_type": "bank",
+          "pattern_UID": "230010",
+          "sort_UID": "230010",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "pan": {
+              "group_id": 1
+            },
+            "amount": {
+              "group_id": 3
+            },
+            "date": {
+              "use_sms_time": true
+            }
+          }
+        },
+        {
+          "regex": "no. X+(\\d{4}) is (.*) Rs.([\\d,]+\\.?\\d{0,2}) on",
+          "account_type": "bank",
+          "pattern_UID": "230011",
+          "sort_UID": "230011",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "pan": {
+              "group_id": 1
+            },
+            "amount": {
+              "group_id": 3
+            },
+            "date": {
+              "use_sms_time": true
+            }
+          }
+        }
+      ],
+      "sender_UID": "90000023",
+      "senders": [
+        "CANBNK",
+        "CANCRD"
+      ]
+            
+        },
+        {
+        "name": "HSBC",
+      "patterns": [{
+          "regex": "-+(\\d{3}) (.*) ([\\d,]+\\.?\\d{0,2})",
+          "account_type": "credit_card",
+          "pattern_UID": "170006",
+          "sort_UID": "170006",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "balance",
+            "date": {
+              "use_sms_time": true
+            },
+            "pos": {
+              "value": "Debit",
+              "set_no_pos": true
+            },
+            "pan": {
+              "group_id": 1
+            },
+            "amount": {
+              "group_id": 3
+            }
+          }
+        }
+      ],
+      "sender_UID": "90000017",
+      "senders": [
+        "HSBCIN",
+        "HSBCBK"
+      ]
+            
+        },
+        {
+        "name":"Kotak",
+          "patterns": [
+                 {
+          "regex": "X+(\\d{6}) is (.*) Rs.([\\d,]+\\.?\\d{0,2}) on (.*) virtual",
+          "account_type": "bank",
+          "pattern_UID": "150022",
+          "sort_UID": "150022",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            
+            "amount": {
+              "group_id": 3
+            },
+            "pan": {
+              "group_id": 1
+            }
+          }
+        },
+        {
+          "regex": "Rs.([\\d,]+\\.?\\d{0,2}) from (.*) X+(\\d{4})",
+          "account_type": "bank",
+          "pattern_UID": "150023",
+          "sort_UID": "150023",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            
+            "amount": {
+              "group_id": 1
+            },
+            "pan": {
+              "group_id": 3
+            }
+          }
+        },
+        {
+          "regex": "no. X+(\\d{4}) is (.*) Rs.([\\d,]+\\.?\\d{0,2}) on",
+          "account_type": "bank",
+          "pattern_UID": "150024",
+          "sort_UID": "150024",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "credit",
+            "date": {
+              "use_sms_time": true
+            },
+            
+            "amount": {
+              "group_id": 3
+            },
+            "pan": {
+              "group_id": 1
+            }
+          }
+        },
+        {
+          "regex": "([\\d,]+\\.?\\d{0,2}) is (.*) A/c X+(\\d{4}) (.*) INR ([\\d,]+\\.?\\d{0,2})",
+          "account_type": "bank",
+          "pattern_UID": "150025",
+          "sort_UID": "150025",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "credit",
+            "date": {
+              "use_sms_time": true
+            },
+            
+            "amount": {
+              "group_id": 1
+            },
+            "account_balance": {
+              "group_id": 5
+            },
+            "pan": {
+              "group_id": 3
+            }
+          }
+        }
+         
+      ],
+      
+    
+     "sender_UID": "90000015",
+      "senders": [
+        "KOTAKB"
+      ]
+                
+},
+{
+    "name":"Axis",
+            "patterns":[
+   {
+          "regex": "Rs ([\\d,]+\\.?\\d{0,2}) for (.*) AUR+(\\d{12}) ",
+          "account_type": "bank",
+          "pattern_UID": "30015",
+          "sort_UID": "30015",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "balance",
+            "date": {
+              "use_sms_time": true
+            },
+            "pan": {
+              "group_id": 3
+            },
+            "amount": {
+              "group_id": 1
+            },
+            "account_balance": {
+              "group_id": 2
+            }
+          }
+        },
+        {
+          "regex": "([\\d,]+\\.?\\d{0,2}) credited (.*) X+(\\d{4})",
+          "account_type": "bank",
+          "pattern_UID": "30016",
+          "sort_UID": "30016",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "credit",
+            "date": {
+              "use_sms_time": true
+            },
+            "pan": {
+              "group_id": 3
+            },
+            "amount": {
+              "group_id": 1
+            },
+            "account_balance": {
+              "group_id": 2
+            }
+          }
+        },
+        {
+          "regex": " (\\d{6}) has (.*) ([\\d,]+\\.?\\d{0,2}) on (.*) ([\\d,]+\\.?\\d{0,2})",
+          "account_type": "bank",
+          "pattern_UID": "30017",
+          "sort_UID": "30017",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            "pan": {
+              "group_id": 1
+            },
+            "amount": {
+              "group_id": 3
+            },
+            "account_balance": {
+              "group_id": 5
+            }
+          }
+        },
+        {
+          "regex": "no. X+(\\d{4}) is (.*) Rs.([\\d,]+\\.?\\d{0,2}) on",
+          "account_type": "bank",
+          "pattern_UID": "30018",
+          "sort_UID": "30018",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            "pan": {
+              "group_id": 1
+            },
+            "amount": {
+              "group_id": 3
+            },
+            "account_balance": {
+              "group_id": 5
+            }
+          }
+        }
+      ],
+      "sender_UID": "9000003",
+      "senders": [
+        "AXISBK"
+      ]
+    },
+     {
+      "patterns": [
+          {
+          "regex": " X+(\\d{4}) is (.*) ([\\d,]+\\.?\\d{0,2}) by (.*) ([\\d,]+\\.?\\d{0,2})",
+          "account_type": "bank",
+          "pattern_UID": "490010",
+          "sort_UID": "490010",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "credit",
+            "date": {
+              "use_sms_time": true
+            },
+            "amount": {
+              "group_id": 3
+            },
+            "pan": {
+              "group_id": 1
+            },
+            "account_balance": {
+              "group_id": 5
+            }
+          }
+        },
+        {
+          "regex": "X+(\\d{4}) (.*) Rs.([\\d,]+\\.?\\d{0,2}) (.*) X+(\\d{3})",
+          "account_type": "bank",
+          "pattern_UID": "490011",
+          "sort_UID": "490011",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "date": {
+              "use_sms_time": true
+            },
+            "amount": {
+              "group_id": 3
+            },
+            "pan": {
+              "group_id": 1
+            }
+           
+          }
+        },
+        {
+          "regex": "A/c \\d+X+(\\d{4}) is (.*) ([\\d,]+\\.?\\d{0,2}) on (.*) is Rs.([\\d,]+\\.?\\d{0,2})",
+          "account_type": "bank",
+          "pattern_UID": "490012",
+          "sort_UID": "490012",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "credit",
+            "date": {
+              "use_sms_time": true
+            },
+            "amount": {
+              "group_id": 3
+            },
+            "account_balance": {
+              "group_id": 5
+            },
+            "pan": {
+              "group_id": 1
+            }
+           
+          }
+        }
+      ],
+      "sender_UID": "90000049",
+      "name": "UCO",
+      "senders": [
+        "UCOBNK"
+      ]
+    },
+    {
+      "name": "StanC",
+      "patterns": [
+          {
+          "regex": "\\d+x+(\\d{4}) (.*) ([\\d,]+\\.?\\d{0,2}) on (.*) ([\\d,]+\\.?\\d{0,2})",
+          "account_type": "credit_card",
+          "pattern_UID": "160013",
+          "sort_UID": "160013",
+          "sms_type": "statement",
+          "data_fields": {
+            "statement_type": "credit_card_bill",
+            "transaction_type": "credit",
+            "pan": {
+              "group_id": 1
+            },
+            "amount": {
+              "group_id": 3
+            },
+            "account_balance": {
+              "group_id": 5
+            },
+            "date": {
+              "group_id": 1,
+              "formats": [
+                {
+                  "use_sms_time": false,
+                  "format": "dd/MM/yy"
+                },
+                {
+                  "use_sms_time": true,
+                  "format": "'immediate'"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "sender_UID": "90000016",
+      "senders": [
+        "FROMSC",
+        "MNHTAN"
+      ]
+    },
+     {
+      "name": "YesBank",
+      "patterns": [
+            {
+          "regex": "No.X+(\\d{4}) (.*) ([\\d,]+\\.?\\d{0,2})",
+          "account_type": "credit_card",
+          "pattern_UID": "190012",
+          "sort_UID": "190012",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "balance",
+            "amount": {
+              "group_id": 3 
+            },
+            "pan": {
+              "group_id": 1
+            },
+            "account_balance": {
+              "group_id": 3
+            },
+           
+            "date": {
+              "group_id": 4,
+              "formats": [
+                {
+                  "use_sms_time": false,
+                  "format": "dd/MM/yy 'at' HH:mm:ss"
+                }
+              ]
+            },
+            "account_balance": {
+              "group_id": 5
+            }
+          }
+        },
+        {
+          "regex": "no. X+(\\d{4}) is (.*) Rs.([\\d,]+\\.?\\d{0,2}) on",
+          "account_type": "credit_card",
+          "pattern_UID": "190013",
+          "sort_UID": "190013",
+          "sms_type": "transaction",
+          "data_fields": {
+            "transaction_type": "debit",
+            "amount": {
+              "group_id": 3 
+            },
+            "pan": {
+              "group_id": 1
+            },
+           
+            "date": {
+              "group_id": 4,
+              "formats": [
+                {
+                  "use_sms_time": false,
+                  "format": "dd/MM/yy 'at' HH:mm:ss"
+                }
+              ]
+            },
+            "account_balance": {
+              "group_id": 5
+            }
+          }
+        }
+      ],
+      "sender_UID": "90000019",
+      "senders": [
+        "YESBNK"
+      ]
+    }
+        ]
+}
